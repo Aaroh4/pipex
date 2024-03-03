@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   error_handling_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:51:12 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/02/27 12:31:48 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:08:56 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
 void	ft_free_child_p(t_pipex pipex)
 {
@@ -41,7 +41,7 @@ void	ft_free_process(t_pipex pipex)
 
 void	ft_error_sort(t_pipex pipex, int i)
 {
-	pipex.pid1 = 1;
+	pipex.pid = 1;
 	if (i == 1)
 		ft_printf("Error: FD failed\n");
 	else if (i == 2)
@@ -58,5 +58,7 @@ void	ft_error_sort(t_pipex pipex, int i)
 	}
 	else if (i == 5)
 		write(2, "Error: ft_split malloc failed\n", 30);
+	else if (i == 6)
+		write(2, "Error: Malloc failed\n", 21);
 	exit(1);
 }

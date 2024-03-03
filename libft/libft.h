@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:22:20 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/02/15 17:11:36 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:57:35 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # endif
 
 # include <unistd.h>
+# include <stddef.h>
 # include <stdarg.h>
 # include <stdlib.h>
 
@@ -68,6 +69,19 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+
+// GNL
+
+char	*create_list(int fd, char *str);
+char	*get_next_line(int fd);
+int		ft_str_chr(char *str);
+char	*ft_strrjoin(char const *s1, char const *s2);
+char	*ft_strdup(const char *src);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		ft_strrlen(const char *str);
+char	*ft_read(int fd, char *str, char *buf);
+char	*ft_sub(char *str);
+void	freestr(char **str);
 
 // PRINTF
 

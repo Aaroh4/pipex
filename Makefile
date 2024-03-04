@@ -6,7 +6,7 @@
 #    By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 12:36:32 by ahamalai          #+#    #+#              #
-#    Updated: 2024/02/29 16:33:37 by ahamalai         ###   ########.fr        #
+#    Updated: 2024/03/04 11:31:35 by ahamalai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ $(NAME): $(OBJS)
 
 bonus:	$(OBJS_B)
 		@$(MAKE) -C $(LIBFTDIR)
-		@$(CC) $(CFLAGS) $(OBJS_B) ./libft/libft.a -o $(NAME) 
+		@$(CC) $(CFLAGS)  $(OBJS_B) ./libft/libft.a -o $(NAME) 
 
 clean:
 		@rm -f $(OBJS)

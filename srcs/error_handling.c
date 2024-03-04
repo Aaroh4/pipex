@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:51:12 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/02/27 12:31:48 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:02:57 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_free_process(t_pipex pipex)
 
 void	ft_error_sort(t_pipex pipex, int i)
 {
-	pipex.pid1 = 1;
 	if (i == 1)
 		ft_printf("Error: FD failed\n");
 	else if (i == 2)
@@ -49,7 +48,7 @@ void	ft_error_sort(t_pipex pipex, int i)
 	else if (i == 3)
 	{
 		ft_free_child_p(pipex);
-		write(2, "Error: Wrong command\n", 21);
+		write(2, "Error: execve failed\n", 21);
 	}
 	else if (i == 4)
 	{

@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:12:00 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/02/23 09:25:57 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:02:37 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ void	ft_second_child(t_pipex pipex, char **argv, char **envp)
 	if (!pipex.cmd_args)
 		ft_error_sort(pipex, 5);
 	pipex.cmd = ft_find_cmd(pipex.cmd_path, pipex.cmd_args[0]);
-	if (!pipex.cmd)
+	if (execve(pipex.cmd, pipex.cmd_args, envp) < 0)
 		ft_error_sort(pipex, 3);
-	execve(pipex.cmd, pipex.cmd_args, envp);
 }
 
 void	ft_do_forking(t_pipex pipex, char **argv, char **envp)

@@ -6,14 +6,11 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:05:51 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/03/02 16:43:00 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:23:40 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 char	*ft_find_path(char **envp)
 {
@@ -27,11 +24,10 @@ void	ft_open_pipes(t_pipex *pipex)
 	int	i;
 
 	i = 0;
-	while(i < pipex->cmd_nbr)
+	while (i < pipex->cmd_nbr)
 	{
 		if (pipe(pipex->pipe + 2 * i) < 0)
-			ft_error_sort(*pipex, 1);
-		// fix error code !!!!!!!!
+			ft_error_sort(*pipex, 2);
 		i++;
 	}
 }
@@ -52,6 +48,11 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pipex;
 
+	if (argc < 5)
+	{
+		write(2, "Error: Wrong amount of arguments\n", 33);
+		exit(1);
+	}
 	ft_memset(&pipex, 0, sizeof(pipex));
 	ft_find_infile(&pipex, argv);
 	ft_find_outfile(&pipex, argv[argc - 1]);
@@ -64,10 +65,9 @@ int	main(int argc, char **argv, char **envp)
 	if (!pipex.cmd_path)
 		ft_error_sort(pipex, 5);
 	ft_open_pipes(&pipex);
-
 	pipex.id = -1;
 	while (++(pipex.id) < pipex.cmd_nbr)
 		ft_do_forking(pipex, argv, envp);
 	waitpid(-1, NULL, 0);
-	//ft_free_process(pipex);
+	ft_free_process(pipex);
 }

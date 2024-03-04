@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:39:36 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/03/03 11:03:04 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/03/04 12:28:37 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	ft_here_doc(char *argv)
 	int		pipe_fd[2];
 
 	if (pipe(pipe_fd) < 0)
-		//ft_error_sort(pipex, 2);
+	{
+		write(2, "Error: Pipe failed\n", 19);
+		exit(1);
+	}
 	buf = NULL;
 	while (1)
 	{
@@ -26,14 +29,14 @@ int	ft_here_doc(char *argv)
 		buf = get_next_line(0);
 		if (!buf)
 			exit(1);
-		if (!ft_strncmp(argv, buf, ft_strlen(argv)))
+		if (!ft_strncmp(argv, buf, ft_strlen(buf) - 1))
 			break ;
 		ft_putstr_fd(buf, pipe_fd[1]);
 		free(buf);
 	}
 	free(buf);
 	close(pipe_fd[1]);
-	return(pipe_fd[0]);
+	return (pipe_fd[0]);
 }
 
 void	ft_find_infile(t_pipex *pipex, char **argv)
@@ -45,10 +48,10 @@ void	ft_find_infile(t_pipex *pipex, char **argv)
 	}
 	else
 	{
-	pipex->here_doc = 0;
-	pipex->infile = open(argv[1], O_RDONLY);
-	if (pipex->infile == -1)
-		ft_error_sort(*pipex, 1);
+		pipex->here_doc = 0;
+		pipex->infile = open(argv[1], O_RDONLY);
+		if (pipex->infile == -1)
+			ft_error_sort(*pipex, 1);
 	}
 }
 
